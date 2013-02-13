@@ -4,11 +4,8 @@
 # You probably should not keep the user and pass in the args, this is a quick utility for data science work.
 # Usage: ./create_table.sh filename.csv db_name table_name user pass
 # @author: Joshua Rumbut joshua.rumbut@gmail.com
-a="create table $3 ( "
-b=$(head -1 $1 | sed -e 's/,/ varchar(255),\n/g')
-c=" varchar(255) );"
 PWD=$(pwd)
 d="LOAD DATA INFILE '${PWD}/${1}' INTO TABLE $3 FIELDS TERMINATED BY ',' ENCLOSED BY '\"' IGNORE 1 LINES;"
-sql_statement=$a$b$c$d
+sql_statement=$d
 echo $sql_statement
 mysql -u$4 -p$5 $2 -e "$sql_statement"
